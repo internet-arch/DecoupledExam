@@ -1,6 +1,6 @@
 DROP DATABASE IF EXISTS `DecoupledExam`;
 CREATE DATABASE `DecoupledExam`;
-DEFAULT CHARACTER SET utf8mb4;
+SET NAMES utf8mb4;
 DEFAULT COLLATE utf8mb4_unicode_ci;
 
 USE `DecoupledExam`;
@@ -27,11 +27,11 @@ CREATE TABLE `user` (
   `username`    VARCHAR(50)  NOT NULL COMMENT '登录账号',
   `password`    VARCHAR(100) NOT NULL COMMENT '加密密码',
   `real_name`   VARCHAR(50)  DEFAULT NULL COMMENT '真实姓名',
-  `user_type`   VARCHAR(20)  NOT NULL COMMENT '用户类型(admin,teacher,student)',
+  `user_type`   INT(4)       NOT NULL DEFAULT 2 COMMENT '用户类型：0=管理员(admin), 1=教师(teacher), 2=学生(student)',
   `face_img`    VARCHAR(255) DEFAULT NULL COMMENT '人脸识别基准照片URL',
   `phone`       VARCHAR(20)  DEFAULT NULL COMMENT '手机号',
-  `status`      CHAR(1)      NOT NULL DEFAULT '0' COMMENT '状态(0正常 1停用)',
-  `create_time` DATETIME     DEFAULT NULL COMMENT '注册时间',
+  `status`      CHAR(1)      NOT NULL DEFAULT '0' COMMENT '状态：0正常 1停用',
+  `create_time` DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '注册时间',
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `uk_username` (`username`),
   KEY `idx_phone` (`phone`),

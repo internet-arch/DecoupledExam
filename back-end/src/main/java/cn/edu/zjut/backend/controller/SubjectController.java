@@ -3,6 +3,8 @@ package cn.edu.zjut.backend.controller;
 import cn.edu.zjut.backend.po.Subject;
 import cn.edu.zjut.backend.service.SubjectService;
 import cn.edu.zjut.backend.util.Response;
+import io.jsonwebtoken.Claims;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -31,7 +33,9 @@ public class SubjectController {
 
     @RequestMapping(value = "/api/subject/import", method = RequestMethod.POST)
     @ResponseBody
-    public Response<List<Subject>> addSubjects(@RequestBody List<Subject> subjects, Model model) {
+    public Response<List<Subject>> addSubjects(@RequestBody List<Subject> subjects, HttpServletRequest res, Model model) {
+        Claims claims = (Claims) res.getAttribute("claims");
+        System.out.println("claims:" + claims);
         if (subjectServ.addSubject(subjects)) {
             return Response.success();
         }
@@ -42,7 +46,9 @@ public class SubjectController {
 
     @RequestMapping(value = "/api/subject", method = RequestMethod.GET)
     @ResponseBody
-    public Response<List<Subject>> getSubject(@RequestParam(value="id", required=false) Integer id, Model model) {
+    public Response<List<Subject>> getSubject(@RequestParam(value="id", required=false) Integer id, HttpServletRequest res) {
+        Claims claims = (Claims) res.getAttribute("claims");
+        System.out.println("claims:" + claims.get("id") + " " + claims.get("username") + " " + claims.get("userType"));
         int subjectId = id==null ? -1 : id;
         List<Subject> subjects = subjectServ.getSubject(subjectId);
         return Response.success(subjects);

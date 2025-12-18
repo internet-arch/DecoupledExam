@@ -3,6 +3,7 @@ package cn.edu.zjut.backend.service;
 import cn.edu.zjut.backend.dao.UserDAO;
 import cn.edu.zjut.backend.po.User;
 import cn.edu.zjut.backend.util.HibernateUtil;
+import cn.edu.zjut.backend.util.Jwt;
 import cn.edu.zjut.backend.util.PasswordEncoder;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -100,7 +101,7 @@ public class UserService {
     /**
      * 用户登录验证
      */
-    public User login(String username, String password) {
+    public String login(String username, String password) {
         Session session = getSession();
         UserDAO dao = new UserDAO();
         dao.setSession(session);
@@ -109,7 +110,9 @@ public class UserService {
             User user = dao.findByUsername(username);
             // 验证密码是否正确且用户状态正常
             if (user != null && PasswordEncoder.matches(password, user.getPassword()) && user.getStatus().equals("0")) {
-                return user; // 登录成功，返回用户信息
+                Jwt jwt = new Jwt();
+                String token = jwt.generateJwtToken(user.getUserId(), user.getUsername(), user.getUserType());
+                return token; // 登录成功，返回用户信息
             }
             return null; // 登录失败
         } finally {

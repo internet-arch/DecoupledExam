@@ -54,12 +54,10 @@ public class UserController {
      */
     @RequestMapping(value = "/user/login", method = RequestMethod.POST)
     @ResponseBody
-    public Response<User> login(@RequestBody LoginRequest loginRequest, HttpSession session) {
-        User user = userService.login(loginRequest.getUsername(), loginRequest.getPassword());
-        if (user != null) {
-            // 将用户信息保存到session中
-            session.setAttribute("currentUser", user);
-            return Response.success(user);
+    public Response<String> login(@RequestBody LoginRequest loginRequest, HttpSession session) {
+        String token = userService.login(loginRequest.getUsername(), loginRequest.getPassword());
+        if (token != null && !token.isEmpty()) {
+            return Response.success(token);
         } else {
             return Response.error("用户名或密码错误，或账户已被禁用");
         }
