@@ -79,9 +79,9 @@ public class LogAspect {
             log.setTargetType(logRecord.targetType());
 
             // 4. 获取当前用户信息
-            log.setUserId(UserContext.getCurrentUserId());
+            log.setUserId(UserContext.getUserId());
 
-            log.setUserRole(UserContext.getCurrentUserRole());
+            log.setUserRole(UserContext.getUserType());
 
             // 5. 执行目标方法
             Object result = joinPoint.proceed();
@@ -128,7 +128,7 @@ public class LogAspect {
             log.setDescription("安全操作");
 
             // 4. 获取当前用户信息
-            log.setUserId(UserContext.getCurrentUserId());
+            log.setUserId(UserContext.getUserId());
 
             // 5. 执行目标方法
             Object result = joinPoint.proceed();
@@ -168,14 +168,14 @@ public class LogAspect {
                 log.setUserAgent(request.getHeader("User-Agent"));
             }
 
-            log.setUsername(UserContext.getCurrentUsername());
+            log.setUsername(UserContext.getUsername());
 
             // 4. 执行目标方法
             Object result = joinPoint.proceed();
 
             // 5. 登录成功
             log.setLoginStatus(1);
-            log.setUserId(UserContext.getCurrentUserId());
+            log.setUserId(UserContext.getUserId());
             return result;
         } catch (Exception e) {
             // 6. 登录失败

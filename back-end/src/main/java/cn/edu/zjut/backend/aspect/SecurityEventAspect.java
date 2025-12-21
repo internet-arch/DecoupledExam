@@ -57,8 +57,8 @@ public class SecurityEventAspect {
                 if (attributes != null) {
                     HttpServletRequest request = attributes.getRequest();
                     String ipAddress = request.getRemoteAddr();
-                    Long userId = UserContext.getCurrentUserId();
-                    String username = UserContext.getCurrentUsername();
+                    Long userId = UserContext.getUserId();
+                    String username = UserContext.getUsername();
                     
                     // 记录安全事件
                     securityLogger.logSecurityEvent(

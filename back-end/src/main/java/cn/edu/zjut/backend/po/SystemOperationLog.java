@@ -25,7 +25,7 @@ public class SystemOperationLog {
     
 
     @Column(name = "user_role")
-    private String userRole;
+    private Integer userRole;
 
     @Column(name = "module")
     private String module;
