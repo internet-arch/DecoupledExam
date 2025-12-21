@@ -34,6 +34,9 @@
         <mapping class="cn.edu.zjut.backend.po.QuestionTags"/>
         <mapping class="cn.edu.zjut.backend.po.ExamPaper"/>
         <mapping class="cn.edu.zjut.backend.po.ExamPaperQuestion"/>
+        <mapping class="cn.edu.zjut.backend.po.SystemOperationLog"/>
+        <mapping class="cn.edu.zjut.backend.po.SecurityEventLog"/>
+        <mapping class="cn.edu.zjut.backend.po.UserLoginLog"/>
         <mapping class="cn.edu.zjut.backend.po.QuestionType"/>
     </session-factory>
 </hibernate-configuration>
