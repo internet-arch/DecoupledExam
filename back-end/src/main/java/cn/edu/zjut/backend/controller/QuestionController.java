@@ -58,7 +58,6 @@ public class QuestionController {
     @RequestMapping(value = "/api/question", method = RequestMethod.GET)
     @ResponseBody
     public Response<List<Questions>> queryQuestion(QuestionQueryDTO dto, Model model) {
-        System.out.println("1");
         List<Questions> questions = questionServ.queryQuestion(dto);
         return Response.success(questions);
     }

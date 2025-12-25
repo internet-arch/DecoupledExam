@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-base-200 flex items-center justify-center p-6">
+  <div class="bg-base-200 flex items-center justify-center p-6">
     <div class="card w-full max-w-md bg-base-100 shadow-2xl">
       <div class="card-body">
         <!-- 头部 -->
@@ -105,6 +105,7 @@ import { useRequest } from "vue-hooks-plus";
 import { loginAPI } from "../../apis"
 import { useMainStore } from "../../stores";
 import router from "../../routers";
+import { jwtDecode } from "jwt-decode";
 
 // 登录表单数据
 const loginForm = reactive({
@@ -156,9 +157,21 @@ const handleLogin = () => {
     onSuccess(res){
       if(res['code']==200){
         let token = res['data']
+        const decoded = jwtDecode(token);
         localStorage.setItem('token', token)
+        localStorage.setItem('userType', decoded['userType'])
         useMainStore().useLoginStore().setLogin(true)
-        router.push('/home')
+        switch (decoded['userType']){
+          case 0:
+            router.push('/admin')
+            break
+          case 1:
+            router.push('/teacher')
+            break
+          case 2:
+            router.push('/student')
+            break
+        }
       }
     },
 
