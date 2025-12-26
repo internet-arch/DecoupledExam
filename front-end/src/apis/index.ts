@@ -5,6 +5,9 @@ import getQuestionsAPI from "./Server/getQuestionsAPI";
 import loginFaceAPI from "./Server/loginFaceAPI";
 import addQuestionsAPI from "./Server/addQuestionsAPI";
 import importQuestionsAPI from "./Server/importQuestionsAPI";
+import registerAPI  from "./Server/registerAPI";
+import teacherRegisterAPI from "./Server/teacherRegisterAPI";
+import userAPI from "./Server/userAPI";
 
 export {
     loginAPI,
@@ -14,4 +17,7 @@ export {
     loginFaceAPI,
     addQuestionsAPI,
     importQuestionsAPI,
+    registerAPI,
+    teacherRegisterAPI,
+    userAPI,
 }
