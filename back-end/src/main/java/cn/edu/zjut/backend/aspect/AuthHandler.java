@@ -11,7 +11,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-
+import cn.edu.zjut.backend.util.UserContext;
 import java.util.Arrays;
 import java.util.List;
 
@@ -24,8 +24,8 @@ public class AuthHandler {
      * 存放不需要身份验证的 URI 路径
      */
     private static final List<String> WHITE_LIST = List.of(
-            "/api/user/register",
-            "/api/user/login"
+            "/back_end_war/api/user/register",
+            "/back_end_war/api/user/login"
     );
 
     @Pointcut("execution(* cn.edu.zjut.backend.controller..*(..))")
@@ -68,6 +68,8 @@ public class AuthHandler {
             }
 
             request.setAttribute("claims", claims);
+            // 设置UserContext，供AOP使用
+            UserContext.setClaims(claims);
 
             // ✅ 放行，执行 Controller
             return joinPoint.proceed();
