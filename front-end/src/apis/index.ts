@@ -29,6 +29,11 @@ import {
     searchStudentsAPI,
     getStudentsNotInExamAPI
 } from "./Server/studentAPI";
+import addQuestionsAPI from "./Server/addQuestionsAPI";
+import importQuestionsAPI from "./Server/importQuestionsAPI";
+import registerAPI  from "./Server/registerAPI";
+import teacherRegisterAPI from "./Server/teacherRegisterAPI";
+import userAPI from "./Server/userAPI";
 
 export {
     loginAPI,
@@ -57,5 +62,10 @@ export {
     getAllStudentsAPI,
     getStudentByIdAPI,
     searchStudentsAPI,
-    getStudentsNotInExamAPI
+    getStudentsNotInExamAPI,
+    addQuestionsAPI,
+    importQuestionsAPI,
+    registerAPI,
+    teacherRegisterAPI,
+    userAPI,
 }

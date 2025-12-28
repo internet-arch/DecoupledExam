@@ -7,8 +7,15 @@ import ExamResult from "./exam/ExamResult.vue";
 import ExamStudents from "./exam/ExamStudents.vue";
 import ExamNotifications from "./student/ExamNotifications.vue";
 
+import Register from "./register/index.vue";
+import TeacherRegister from "./admin/teacherRegister/index.vue";
+import ProfileManagement from "./profile/index.vue";
+import Question from "./question/index.vue"
 export {
     Login,
+    Register,
+    TeacherRegister,
+    ProfileManagement,
     Question,
     ExamList,
     ExamDetail,
@@ -17,3 +24,6 @@ export {
     ExamStudents,
     ExamNotifications
 }
+
+
+

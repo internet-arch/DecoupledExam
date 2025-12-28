@@ -106,7 +106,7 @@
         <div class="text-center">
           <p class="text-base-content/70">
             还没有账户？
-            <a href="#" class="link link-primary font-semibold hover:link-hover">立即注册</a>
+            <router-link to="/register" class="link link-primary font-semibold hover:link-hover">立即注册</router-link>
           </p>
         </div>
       </div>
@@ -179,6 +179,7 @@ const handleLogin = () => {
         localStorage.setItem('token', token)
         localStorage.setItem('userType', decoded['userType'])
         useMainStore().useLoginStore().setLogin(true)
+        router.push('/admin/teacher/register')
         switch (decoded['userType']){
           case 0:
             router.push('/admin').then(()=>{window.location.reload();})
@@ -190,10 +191,14 @@ const handleLogin = () => {
             router.push('/student').then(()=>{window.location.reload();})
             break
         }
+      }else{
+        ElNotification({title: 'Warning', message: res['msg'], type: 'warning',})
       }
     },
 
-    onError(err){},
+    onError(err){
+      ElNotification({title: 'Error', message: err['msg'], type: 'error',})
+    },
 
     onFinally(){
       isLoading.value = false

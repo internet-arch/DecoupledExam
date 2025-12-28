@@ -333,6 +333,74 @@ public class UserController {
         }
     }
 
+    /**
+     * 上传用户头像
+     */
+    @RequestMapping(value = "/user/avatar/upload", method = RequestMethod.POST)
+    @ResponseBody
+    public Response<String> uploadUserAvatar(@RequestParam("file") MultipartFile file, HttpServletRequest httpRequest) {
+        Claims claims = (Claims) httpRequest.getAttribute("claims");
+        if (claims == null) {
+            return Response.error("请先登录");
+        }
+
+        Long currentUserId = ((Number) claims.get("id")).longValue();
+
+        // 检查是否有文件上传
+        if (file.isEmpty()) {
+            return Response.error("请选择要上传的头像文件");
+        }
+
+        // 检查文件类型是否为图片
+        String contentType = file.getContentType();
+        if (contentType == null || !contentType.startsWith("image/")) {
+            return Response.error("请选择图片文件（jpg、png、gif等）");
+        }
+
+        try {
+            // 确保目录存在
+            String uploadDir = "D:/JAVAfile/JavaEEprogram/DecoupledExam/uploads/avatars";
+            File dir = new File(uploadDir);
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
+
+            // 生成唯一文件名
+            String originalFilename = file.getOriginalFilename();
+            String fileExtension = "";
+            if (originalFilename != null && originalFilename.contains(".")) {
+                fileExtension = originalFilename.substring(originalFilename.lastIndexOf("."));
+            }
+            String newFileName = "avatar_" + currentUserId + "_" + System.currentTimeMillis() + fileExtension;
+
+            // 保存文件到指定目录
+            String filePath = uploadDir + "/" + newFileName;
+            file.transferTo(new File(filePath));
+
+            // 生成访问URL
+            String fileUrl = "/uploads/avatars/" + newFileName;
+
+            // 更新用户的头像URL
+            User userToUpdate = new User();
+            userToUpdate.setUserId(currentUserId);
+            userToUpdate.setAvatarUrl(fileUrl);
+
+            if (userService.updateUser(userToUpdate)) {
+                return Response.success(fileUrl);
+            } else {
+                // 如果更新数据库失败，删除已上传的文件
+                File uploadedFile = new File(filePath);
+                if (uploadedFile.exists()) {
+                    uploadedFile.delete();
+                }
+                return Response.error("头像上传失败");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.error("头像上传失败：" + e.getMessage());
+        }
+    }
+
 
     /**
      * 更新用户信息
@@ -353,6 +421,7 @@ public class UserController {
         userToUpdate.setUserId(currentUserId); // 从token获取用户ID
         userToUpdate.setUsername(request.getUsername());
         userToUpdate.setRealName(request.getRealName());
+        userToUpdate.setAvatarUrl(request.getAvatarUrl());
         userToUpdate.setPhone(request.getPhone());
         
         // 验证手机号格式（如果提供了手机号）
@@ -521,6 +590,75 @@ public class UserController {
     }
     
     /**
+     * 根据用户ID获取用户信息（仅管理员可访问其他用户信息）
+     */
+    @RequestMapping(value = "/user/{userId}", method = RequestMethod.GET)
+    @ResponseBody
+    public Response<User> getUserById(@PathVariable("userId") Long userId, HttpServletRequest request) {
+        Claims claims = (Claims) request.getAttribute("claims");
+        if (claims == null) {
+            return Response.error("请先登录");
+        }
+        
+        Long currentUserId = ((Number) claims.get("id")).longValue();
+        Integer currentUserType = (Integer) claims.get("userType");
+        
+        // 普通用户只能查看自己的信息，管理员可以查看所有用户信息
+        if (!currentUserId.equals(userId) && currentUserType != 0) {
+            return Response.error("权限不足，只能查看自己的信息或管理员可查看所有用户信息");
+        }
+        
+        User user = userService.getUserById(userId);
+        if (user != null) {
+            // 清除密码信息再返回
+            user.setPassword(null);
+            return Response.success(user);
+        } else {
+            return Response.error("用户不存在");
+        }
+    }
+    
+    /**
+     * 获取当前用户头像
+     */
+    @RequestMapping(value = "/user/avatar", method = RequestMethod.GET)
+    @ResponseBody
+    public Response<String> getUserAvatar(HttpServletRequest request) {
+        Claims claims = (Claims) request.getAttribute("claims");
+        if (claims == null) {
+            return Response.error("请先登录");
+        }
+        
+        Long currentUserId = ((Number) claims.get("id")).longValue();
+        User user = userService.getUserById(currentUserId);
+        if (user != null) {
+            return Response.success(user.getAvatarUrl());
+        } else {
+            return Response.error("用户不存在");
+        }
+    }
+    
+    /**
+     * 获取当前用户人脸基准照片
+     */
+    @RequestMapping(value = "/user/face-image", method = RequestMethod.GET)
+    @ResponseBody
+    public Response<String> getUserFaceImage(HttpServletRequest request) {
+        Claims claims = (Claims) request.getAttribute("claims");
+        if (claims == null) {
+            return Response.error("请先登录");
+        }
+        
+        Long currentUserId = ((Number) claims.get("id")).longValue();
+        User user = userService.getUserById(currentUserId);
+        if (user != null) {
+            return Response.success(user.getFaceImg());
+        } else {
+            return Response.error("用户不存在");
+        }
+    }
+    
+    /**
      * 管理员模拟用户登录
      */
     @RequestMapping(value = "/user/simulate", method = RequestMethod.POST)
@@ -539,7 +677,7 @@ public class UserController {
         if (simulateUser != null) {
             // 返回模拟用户的JWT Token
             Jwt jwtUtil = new Jwt();
-            String token = jwtUtil.generateJwtToken(simulateUser.getUserId(), simulateUser.getUsername(), simulateUser.getUserType());
+            String token = jwtUtil.generateJwtToken(simulateUser.getUserId(), simulateUser.getUsername(), simulateUser.getUserType(), simulateUser.getFaceImg());
             simulateUser.setPassword(null); // 清除密码信息
             return Response.success(simulateUser);
         } else {
