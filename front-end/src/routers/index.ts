@@ -4,6 +4,12 @@ import { useMainStore } from "../stores";
 import { storeToRefs } from "pinia";
 
 import { Login, Question } from "../views";
+import ExamList from "../views/exam/ExamList.vue";
+import ExamDetail from "../views/exam/ExamDetail.vue";
+import CreateExam from "../views/exam/CreateExam.vue";
+import ExamResult from "../views/exam/ExamResult.vue";
+import ExamStudents from "../views/exam/ExamStudents.vue";
+import ExamNotifications from "../views/student/ExamNotifications.vue";
 
 const routes : Array<RouteRecordRaw> = [
     {
@@ -19,6 +25,46 @@ const routes : Array<RouteRecordRaw> = [
         path: "/teacher/question",
         name: "question",
         component : Question,
+    },
+    // 考试相关路由
+    {
+        path: "/exam",
+        name: "exam-list",
+        component: ExamList,
+    },
+    {
+        path: "/exam/:id",
+        name: "exam-detail",
+        component: ExamDetail,
+        props: true
+    },
+    {
+        path: "/exam/:id/edit",
+        name: "exam-edit",
+        component: CreateExam,
+        props: true
+    },
+    {
+        path: "/exam/create",
+        name: "exam-create",
+        component: CreateExam
+    },
+    {
+        path: "/exam/:id/result",
+        name: "exam-result",
+        component: ExamResult,
+        props: true
+    },
+    {
+        path: "/exam/:id/students",
+        name: "exam-students",
+        component: ExamStudents,
+        props: true
+    },
+    {
+        path: "/student/notifications",
+        name: "exam-notifications",
+        component: ExamNotifications
     }
 ]
 
@@ -40,7 +86,20 @@ router.beforeEach((to,_,next) => {
             next("/login");
         }
     }else{
-        next();
+        // 根据用户类型重定向到相应的考试页面
+        const userType = localStorage.getItem('userType');
+        if (userType === '0' && to.path === '/') {
+            // 教务老师 -> 考试管理
+            next('/exam');
+        } else if (userType === '1' && to.path === '/') {
+            // 普通老师 -> 考试管理
+            next('/exam');
+        } else if (userType === '2' && to.path === '/') {
+            // 学生 -> 我的考试
+            next('/exam');
+        } else {
+            next();
+        }
     }
 });
 

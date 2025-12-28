@@ -6,7 +6,23 @@
   <div class="flex-none">
     <ul v-if="userType=='1'" class="menu menu-horizontal px-1 text-base">
       <li><a href="/teacher/question">题库管理</a></li>
-      <li><a>试卷管理</a></li>
+      <li><a href="/exam">考试管理</a></li>
+    </ul>
+    <ul v-else-if="userType=='0'" class="menu menu-horizontal px-1 text-base">
+      <li><a href="/admin/teachers">教师管理</a></li>
+      <li><a href="/exam">考试管理</a></li>
+    </ul>
+    <ul v-else-if="userType=='2'" class="menu menu-horizontal px-1 text-base">
+      <li><a href="/exam">我的考试</a></li>
+      <li><a href="/student/notifications">考试通知</a></li>
+    </ul>
+    <ul v-else-if="userType=='1'" class="menu menu-horizontal px-1 text-base">
+      <li><a href="/teacher/question">题库管理</a></li>
+      <li><a href="/exam">考试管理</a></li>
+    </ul>
+    <ul v-else-if="userType=='0'" class="menu menu-horizontal px-1 text-base">
+      <li><a href="/admin/teachers">教师管理</a></li>
+      <li><a href="/exam">考试管理</a></li>
     </ul>
   </div>
   <div v-if="userType" class="dropdown dropdown-end">
@@ -20,14 +36,17 @@
     <ul
         tabindex="0"
         class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+      <li v-if="userType === '1'">
+        <a href="/teacher/subjects">学科管理</a>
+      </li>
       <li>
         <a class="justify-between">
-          Profile
+          个人资料
           <span class="badge">New</span>
         </a>
       </li>
-      <li><a>Settings</a></li>
-      <li><a @click="logout">Logout</a></li>
+      <li><a>设置</a></li>
+      <li><a @click="logout">退出登录</a></li>
     </ul>
   </div>
 </div>
