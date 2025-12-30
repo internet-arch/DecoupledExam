@@ -5,8 +5,11 @@
   </div>
   <div class="flex-none">
     <ul v-if="userType=='1'" class="menu menu-horizontal px-1 text-base">
-      <li><a href="/teacher/question">题库管理</a></li>
-      <li><a>试卷管理</a></li>
+      <li><router-link to="/teacher/question">题库管理</router-link></li>
+      <li><router-link to="/teacher/exam-paper">试卷管理</router-link></li>
+    </ul>
+    <ul v-if="userType=='0'" class="menu menu-horizontal px-1 text-base">
+      <li><router-link to="/admin/subject">学科管理</router-link></li>
     </ul>
   </div>
   <div v-if="userType" class="dropdown dropdown-end">

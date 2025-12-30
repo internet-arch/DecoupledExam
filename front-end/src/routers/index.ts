@@ -3,14 +3,7 @@ import pinia from "../stores/createPinia";
 import { useMainStore } from "../stores";
 import { storeToRefs } from "pinia";
 
-
-import {
-  Login,
-  Register,
-  TeacherRegister,
-  ProfileManagement,
-  Question
-} from "../views";
+import { Admin, Login, Register, TeacherRegister, ProfileManagement, Question, Subject, ExamPaper } from "../views";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -42,8 +35,23 @@ const routes: Array<RouteRecordRaw> = [
     component: TeacherRegister,
   },
   {
+    path: "/teacher/question",
+    name: "question",
+    component: Question,
+  },
+  {
+    path: "/teacher/exam-paper",
+    name: "examPaper",
+    component: ExamPaper,
+  },
+  {
+    path: "/admin/subject",
+    name: "subject",
+    component: Subject,
+  },
+  {
     path: "/admin",
-    component: () => import('../views/admin/index.vue'),
+    component: Admin,
     children: [
       {
         path: "",
@@ -54,14 +62,10 @@ const routes: Array<RouteRecordRaw> = [
         path: "profile",
         name: "profileManagement",
         component: ProfileManagement,
-      },
-      {
-        path: "/teacher/question",
-        name: "question",
-        component : Question,
       }
     ]
-  }
+  },
+
 ];
 
 const router = createRouter({
