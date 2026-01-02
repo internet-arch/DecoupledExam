@@ -3,6 +3,34 @@ import getQuestionTypeAPI from "./Server/questions/getQuestionTypeAPI";
 import getSubjectAPI from "./Server/getSubjectAPI";
 import getQuestionsAPI from "./Server/questions/getQuestionsAPI";
 import loginFaceAPI from "./Server/loginFaceAPI";
+import {
+    createExamAPI,
+    getExamListAPI,
+    getExamDetailAPI,
+    getExamRecordAPI,
+    updateExamAPI,
+    deleteExamAPI,
+    addStudentsToExamAPI,
+    removeStudentsFromExamAPI,
+    getExamStudentsAPI,
+    exportExamDataAPI,
+    publishExamToCourseAPI,
+    unpublishExamFromCourseAPI,
+    getExamPublishedCoursesAPI,
+    getCourseExamsAPI,
+    getStudentExamsAPI,
+    getStudentNotificationsAPI,
+    getExamNotificationsAPI,
+    initExamNotificationsAPI
+} from "./Server/examAPI";
+import {
+    getAllStudentsAPI,
+    getStudentByIdAPI,
+    searchStudentsAPI,
+    getStudentsNotInExamAPI
+} from "./Server/studentAPI";
+import addQuestionsAPI from "./Server/addQuestionsAPI";
+import importQuestionsAPI from "./Server/importQuestionsAPI";
 import addQuestionsAPI from "./Server/questions/addQuestionsAPI";
 import importQuestionsAPI from "./Server/questions/importQuestionsAPI";
 import registerAPI  from "./Server/registerAPI";
@@ -34,6 +62,28 @@ export {
     getSubjectAPI,
     getQuestionsAPI,
     loginFaceAPI,
+    createExamAPI,
+    getExamListAPI,
+    getExamDetailAPI,
+    getExamRecordAPI,
+    updateExamAPI,
+    deleteExamAPI,
+    addStudentsToExamAPI,
+    removeStudentsFromExamAPI,
+    getExamStudentsAPI,
+    exportExamDataAPI,
+    publishExamToCourseAPI,
+    unpublishExamFromCourseAPI,
+    getExamPublishedCoursesAPI,
+    getCourseExamsAPI,
+    getStudentExamsAPI,
+    getStudentNotificationsAPI,
+    getExamNotificationsAPI,
+    initExamNotificationsAPI,
+    getAllStudentsAPI,
+    getStudentByIdAPI,
+    searchStudentsAPI,
+    getStudentsNotInExamAPI,
     addQuestionsAPI,
     importQuestionsAPI,
     registerAPI,

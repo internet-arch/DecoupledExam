@@ -5,6 +5,24 @@
   </div>
   <div class="flex-none">
     <ul v-if="userType=='1'" class="menu menu-horizontal px-1 text-base">
+      <li><a href="/teacher/question">题库管理</a></li>
+      <li><a href="/exam">考试管理</a></li>
+    </ul>
+    <ul v-else-if="userType=='0'" class="menu menu-horizontal px-1 text-base">
+      <li><a href="/admin/teachers">教师管理</a></li>
+      <li><a href="/exam">考试管理</a></li>
+    </ul>
+    <ul v-else-if="userType=='2'" class="menu menu-horizontal px-1 text-base">
+      <li><a href="/exam">我的考试</a></li>
+      <li><a href="/student/notifications">考试通知</a></li>
+    </ul>
+    <ul v-else-if="userType=='1'" class="menu menu-horizontal px-1 text-base">
+      <li><a href="/teacher/question">题库管理</a></li>
+      <li><a href="/exam">考试管理</a></li>
+    </ul>
+    <ul v-else-if="userType=='0'" class="menu menu-horizontal px-1 text-base">
+      <li><a href="/admin/teachers">教师管理</a></li>
+      <li><a href="/exam">考试管理</a></li>
       <li><router-link to="/teacher/question">题库管理</router-link></li>
       <li><router-link to="/teacher/exam-paper">试卷管理</router-link></li>
     </ul>
@@ -28,7 +46,14 @@
     <ul
         tabindex="0"
         class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+      <li v-if="userType === '1'">
+        <a href="/teacher/subjects">学科管理</a>
+      </li>
       <li>
+        <a class="justify-between">
+          个人资料
+          <span class="badge">New</span>
+        </a>
         <router-link to="/student">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10.5L12 4l9 6.5V20a1 1 0 01-1 1h-4v-6H8v6H4a1 1 0 01-1-1V10.5z" />
