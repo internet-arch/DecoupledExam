@@ -19,16 +19,16 @@
         <div class="p-6 space-y-6 text-base w-3/4">
           <!-- 操作区域 -->
           <div class="flex flex-wrap gap-3 items-center">
-            <button class="btn btn-primary" onclick="questionCreateDialog.showModal()">
+            <button v-if="!isComponent" class="btn btn-primary" onclick="questionCreateDialog.showModal()">
               创建题目
             </button>
 
-            <button class="btn btn-accent" onclick="importQuestionDialog.showModal()">
+            <button v-if="!isComponent" class="btn btn-accent" onclick="importQuestionDialog.showModal()">
               导入题目
             </button>
 
             <button
-                v-if="!showCheckboxes"
+                v-if="!showCheckboxes && !isComponent"
                 class="btn btn-secondary"
                 @click="enterBatchMode"
             >
@@ -38,16 +38,24 @@
             <div v-else class="flex items-center gap-3">
               <span class="text-sm">已选 {{ selectedIds.length }} 项</span>
               <button class="btn btn-outline btn-sm" @click="exitBatchMode">
-                退出批量
+                {{ isComponent ? '取消所有选择' : '退出批量' }}
               </button>
               <button
+                  v-if="!isComponent"
                   class="btn btn-error btn-sm"
                   :disabled="selectedIds.length === 0"
                   @click="handleBatchDelete"
               >
                 批量删除
               </button>
-              <!-- 可扩展更多批量操作 -->
+              <button
+                  v-else
+                  class="btn btn-success btn-sm"
+                  :disabled="selectedIds.length === 0"
+                  @click="emit('selectQuestions', selectedIds)"
+              >
+                批量添加
+              </button>
             </div>
           </div>
 
@@ -76,13 +84,14 @@
               </tr>
               </thead>
               <tbody>
-              <tr v-for="(question, index) in questions" :key="question.id" class="hover" @contextmenu.prevent="openMenu($event, question.id)">
+              <tr v-for="(question, index) in questions" :key="question.id" @click="toggleSelect(question.id)" class="hover cursor-pointer" @contextmenu.prevent="openMenu($event, question.id)">
                 <!-- 多选框单元格 -->
-                <td v-if="showCheckboxes" class="text-center">
+                <td v-if="showCheckboxes || isComponent" class="text-center">
                   <input
                       type="checkbox"
                       class="checkbox checkbox-sm"
                       :checked="selectedIds.includes(question.id)"
+                      @click.stop
                       @change="() => toggleSelect(question.id)"
                   />
                 </td>
@@ -155,19 +164,15 @@
     @close="closeQuestionImport"
     @getQuestions="getQuestions(false)"
   />
-  <QuestionDetailDialog
-      v-if="questionTypes.length > 0 && subjectsList.length > 0"
+  <QuestionPreviewDialog
+      v-if="questionTypes.length > 0 && subjectsList.length > 0 && selectedQuestion !== null"
       v-model="selectedQuestion"
-      :questionTypes="questionTypes"
-      :subjectsList="subjectsList"
-      @save="handleSaveQuestion"
-      @close="()=>{selectedQuestion = null; }"
+      @close="closeQuestionPreview"
   />
   <QuestionTagDialog
       v-model="showTagDialog"
       :tags="currentTags"
       :questionId="nowId"
-      @save="handleSaveTags"
   />
   <!-- 右键菜单 -->
   <ul
@@ -177,16 +182,24 @@
   >
     <li @click="deleteQuestions([nowId])"><a>删除</a></li>
     <li @click="modifyQuestions"><a>修改</a></li>
-    <li @click="openQuestionDetail(questions.find(question => question.id === nowId))"><a>查看题目详情</a></li>
+    <li @click="openQuestionPreview(questions.find(question => question.id === nowId))"><a>题目预览</a></li>
     <li @click="openTagManager"><a>标签管理</a></li>
   </ul>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, watch, onMounted, nextTick } from 'vue'
-import { QuestionFilters, QuestionCreateDialog, QuestionImportDialog, QuestionDetailDialog, QuestionTagDialog } from "../../components";
+import { QuestionFilters, QuestionCreateDialog, QuestionImportDialog, QuestionPreviewDialog, QuestionTagDialog } from "../../components";
 import { useRequest } from "vue-hooks-plus";
 import { getQuestionsAPI, getQuestionTypeAPI, getSubjectAPI, deleteQuestionsAPI, getQuestionTagsAPI } from '../../apis'
+
+const props = withDefaults(defineProps<{  // 用于在组卷中（作为一个组件中），可以进行选择
+  isComponent?: boolean
+}>(), {
+  isComponent: false // 在这里设置默认值
+})
+
+const emit = defineEmits(['selectQuestions'])   // 用于在组卷中（作为一个组件中），可以进行选择
 
 // 审核状态映射（根据你的实际字段调整）
 const statusMap = {
@@ -215,6 +228,7 @@ const questionTypes = ref([])
 const subjectsList = ref([])
 
 onMounted(()=>{
+
   useRequest(()=>getQuestionTypeAPI(), {
     onSuccess(res) {
       if (res['code'] === 200) {
@@ -250,18 +264,13 @@ const openTagManager = () => {
   showTagDialog.value = true
 }
 
-const handleSaveTags = async (tagNames: string[]) => {
-  console.log('要保存的标签:', tagNames)
-  // 调用 API：PATCH /questions/:id/tags { tags: ['多态', '封装'] }
-  // await updateQuestionTags(questionId, tagNames)
-  // 更新本地状态...
-  // showTagDialog.value = false
-}
-
 const selectedQuestion = ref<Question | null>(null)
 
-const openQuestionDetail = (question: Question) => {
+const openQuestionPreview = (question: Question) => {
   selectedQuestion.value = question
+  nextTick(()=>{
+    questionPreviewDialog.showModal()
+  })
 }
 
 const handleSaveQuestion = async (updated: Question) => {
@@ -434,7 +443,6 @@ const { run: runWithoutDebounce } = useRequest((filterParam)=>getQuestionsAPI(<a
   manual: true
 })
 
-
 // 重置方法
 const resetFilters = () => {
   filters.value = {
@@ -532,14 +540,22 @@ const deleteQuestions = (ids: (string | number)[]) => {
 
 const modifyQuestions = () => {
   questionCreateDialog.showModal()
+  nowId.value = null
 }
 
 const close = () => {
   questionCreateDialog.close()
   getQuestions(false)
+  nowId.value = null
 }
+
 const closeQuestionImport = () => {
   importQuestionDialog.close()
-  getQuestions(false)
+  nowId.value = null
+}
+
+const closeQuestionPreview = () => {
+  selectedQuestion.value = null;
+  questionPreviewDialog.close()
 }
 </script>

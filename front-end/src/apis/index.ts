@@ -27,6 +27,9 @@ import modifyExamPaperAPI from "./Server/examPaper/modifyExamPaperAPI";
 import deleteExamPaperQuestionsAPI from "./Server/examPaper/deleteExamPaperQuestionsAPI";
 import modifyExamPaperQuestionAPI from "./Server/examPaper/modifyExamPaperQuestionAPI";
 import addExamPaperQuestionsAPI from "./Server/examPaper/addExamPaperQuestionsAPI";
+import getImportProgressAPI from "./Server/questions/getImportProgressAPI";
+import getPaperGenerateProgressAPI from "./Server/examPaper/getPaperGenerateProgressAPI";
+import modifySealedStatusAPI from "./Server/examPaper/modifySealedStatusAPI";
 
 export {
     loginAPI,
@@ -58,4 +61,7 @@ export {
     deleteExamPaperQuestionsAPI,
     modifyExamPaperQuestionAPI,
     addExamPaperQuestionsAPI,
+    getImportProgressAPI,
+    getPaperGenerateProgressAPI,
+    modifySealedStatusAPI
 }

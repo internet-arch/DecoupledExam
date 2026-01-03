@@ -41,8 +41,8 @@
           <div v-if="editingIndex === index" class="flex-1 flex gap-1">
             <input
                 v-model="editValue"
-                @blur="saveEdit"
-                @keyup.enter="saveEdit"
+                @blur="saveEdit(index)"
+                @keyup.enter="saveEdit(index)"
                 ref="editInputRef"
                 type="text"
                 class="input input-xs input-bordered flex-1"
@@ -70,7 +70,7 @@
       <!-- 底部按钮 -->
       <div class="modal-action mt-4">
         <button class="btn" @click="close">取消</button>
-        <button class="btn btn-primary" @click="save">保存</button>
+        <button class="btn btn-primary" @click="close">确定</button>
       </div>
     </div>
     <form method="dialog" class="modal-backdrop">
@@ -97,7 +97,6 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (e: 'update:modelValue', value: boolean): void
-  (e: 'save', tagNames: string[]): void
 }>()
 
 const dialogRef = ref<HTMLDialogElement | null>(null)
@@ -168,15 +167,17 @@ const startEdit = (index: number) => {
   })
 }
 
-const saveEdit = () => {
+const saveEdit = (index) => {
   const name = editValue.value.trim()
   if (name && editingIndex.value !== null) {
     // 去重（排除自身）
     const isDuplicate = localTags.value.some(
         (t, i) => i !== editingIndex.value && t.tagName === name
     )
+
+    localTags.value[index].tagName = editValue.value
+
     if (!isDuplicate) {
-      console.log('修改标签：', localTags.value[editingIndex.value])
       let data = {
         id: localTags.value[editingIndex.value]['id'],
         questionId: props.questionId,
@@ -218,8 +219,8 @@ const deleteSelected = () => {
   useRequest(()=>deleteQuestionTagsAPI(data),{
     onSuccess(res) {
       if (res['code'] === 200) {
-        alert('删除成功')
         getTags()
+        alert('删除成功')
       }
     }
   })
@@ -235,13 +236,6 @@ const getTags = () => {
       }
     }
   })
-}
-
-// --- 保存 ---
-const save = () => {
-  const tagNames = localTags.value.map(t => t.tagName)
-  emit('save', tagNames)
-  close()
 }
 
 const close = () => {

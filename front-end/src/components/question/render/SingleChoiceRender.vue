@@ -26,6 +26,11 @@
     <div v-if="showSolution && analysis" class="analysis">
       <strong>解析：</strong>{{ analysis.analysisDesc }}
     </div>
+
+    <!-- 分值 -->
+    <div v-if="score !== undefined" class="mt-2 text-right text-sm text-gray-500">
+      （{{ score }} 分）
+    </div>
   </div>
 </template>
 

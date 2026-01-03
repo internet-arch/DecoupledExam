@@ -4,7 +4,7 @@ import QuestionFilters from "./question/QuestionFilters.vue";
 import CameraRecorder from "./cameraRecorderDia/index.vue";
 import QuestionCreateDialog from "./question/QuestionCreateDialog.vue";
 import QuestionImportDialog from "./question/QuestionImportDialog.vue";
-import QuestionDetailDialog from "./question/QuestionDetailDialog.vue";
+import QuestionPreviewDialog from "./question/QuestionPreviewDialog.vue";
 import QuestionTagDialog from "./question/QuestionTagDialog.vue";
 import ExamPaperFilter from "./examPaper/ExamPaperFilter.vue"
 import ManualComposeDialog from "./examPaper/ManualComposeDialog.vue";
@@ -20,7 +20,7 @@ export {
     CameraRecorder,
     QuestionCreateDialog,
     QuestionImportDialog,
-    QuestionDetailDialog,
+    QuestionPreviewDialog,
     QuestionTagDialog,
     ExamPaperFilter,
     ManualComposeDialog,

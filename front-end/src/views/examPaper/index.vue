@@ -51,7 +51,14 @@
         </button>
       </div>
 
-      <table class="table w-3/4 text-base mt-4">
+      <div v-show="isLoading" class="flex flex-row gap-4 mt-4">
+        <span class="loading loading-ring loading-xs"></span>
+        <span class="loading loading-ring loading-sm"></span>
+        <span class="loading loading-ring loading-md"></span>
+        <span class="loading loading-ring loading-lg"></span>
+      </div>
+
+      <table v-show="!isLoading" class="table w-3/4 text-base mt-4">
         <thead>
         <tr>
           <!-- 多选框列：仅在批量模式下显示 -->
@@ -143,12 +150,12 @@
     <li @click="isOpenEditExamPaperDia=true"><a>编辑试卷</a></li>
     <li @click="deleteExamPapers"><a>删除试卷</a></li>
     <li onclick="paperPreviewDialog.showModal()"><a>预览试卷</a></li>
-    <li @click=""><a>封存</a></li>
+    <li @click="changeSealStatus"><a>{{ papers[nowInd].isSealed === '1' ? "取消封存" : "封存" }}</a></li>
   </ul>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import {ref, onMounted, nextTick} from 'vue'
 import {
   ExamPaperFilter,
   ManualComposeDialog,
@@ -156,7 +163,13 @@ import {
   EditExamPaperDialog,
   PaperPreview
 } from '../../components'
-import { getExamPapersAPI, getQuestionTypeAPI, getSubjectsAPI, deleteExamPapersAPI } from '../../apis'
+import {
+  getExamPapersAPI,
+  getQuestionTypeAPI,
+  getSubjectsAPI,
+  deleteExamPapersAPI,
+  modifySealedStatusAPI
+} from '../../apis'
 import { useRequest } from 'vue-hooks-plus'
 
 // --- 数据 ---
@@ -172,6 +185,8 @@ const isOpenEditExamPaperDia = ref<boolean>(false)
 // --- 批量操作状态 ---
 const isBatchMode = ref(false)
 const selectedIds = ref(new Set<number>())
+
+const isLoading = ref(false)
 
 // --- 生命周期 ---
 onMounted(() => {
@@ -208,7 +223,20 @@ const closeMenu = () => {
 }
 
 const changeSealStatus = () => {
+  useRequest(()=>modifySealedStatusAPI([nowId.value]),{
+    onSuccess(res) {
+      if (res['code'] === 200) {
+        getExamPapers()
+        alert("修改成功")
 
+      }else{
+        alert("修改失败")
+      }
+    },
+    onError(err) {
+      alert("遇到错误：" + err)
+    }
+  })
 }
 
 // --- API 方法 ---
@@ -236,6 +264,9 @@ const getExamPapers = () => {
   nowInd.value = -1
 
   useRequest(() => getExamPapersAPI(), {
+    onBefore(){
+      isLoading.value = true;
+    },
     onSuccess(res) {
       if (res['code'] === 200) {
         papers.value = res['data']
@@ -245,6 +276,9 @@ const getExamPapers = () => {
           selectedIds.value = new Set([...selectedIds.value].filter(id => validIds.has(id)))
         }
       }
+    },
+    onFinally(){
+      isLoading.value = false;
     }
   })
 }

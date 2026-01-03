@@ -45,7 +45,15 @@
 
         <!-- 题库选择区域 -->
         <div class="mb-6">
-          <h4 class="font-semibold mb-2">从题库选择题目</h4>
+          <div class="flex flex-row gap-2 items-center mb-4">
+            <h4 class="font-semibold">从题库选择题目</h4>
+            <button
+                class="btn btn-sm btn-outline"
+                onclick="questionDialog.showModal()"
+            >
+              高级选择
+            </button>
+          </div>
           <div class="flex gap-2 mb-3">
             <input
                 v-model="searchKeyword"
@@ -131,13 +139,28 @@
       </div>
 
       <!-- 背景遮罩点击关闭 -->
-      <div class="modal-backdrop" @click="open = false"></div>
+      <div class="modal-backdrop cursor-pointer" @click="open = false"></div>
     </div>
   </div>
+  <dialog id="questionDialog" class="modal">
+    <div class="modal-box max-w-[95vw] w-[95vw] ">
+      <form method="dialog">
+        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+      </form>
+      <Question
+          :is-component="true"
+          @selectQuestions ="selectQuestions"
+      />
+    </div>
+    <form method="dialog" class="modal-backdrop">
+      <button>close</button>
+    </form>
+  </dialog>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, watch, onMounted } from 'vue'
+import { Question } from "../../views"
 import { addExamPapersAPI, getQuestionsAPI } from '../../apis'
 import { useRequest } from "vue-hooks-plus"; // 假设你有这个 API
 
@@ -159,6 +182,14 @@ watch(open, (val) => emit('update:open', val))
 onMounted(()=>{
   getQuestions();
 })
+
+const selectQuestions = (ids) => {  // 通过Question组件来选择题目
+  for (const id of ids) {
+    const q = allQuestions.value.find(q => q.id === id)
+    toggleQuestion(q)
+  }
+  questionDialog.close()
+}
 
 // 表单数据
 const form = ref({

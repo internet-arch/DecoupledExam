@@ -1,9 +1,34 @@
-import axios, { AxiosRequestConfig } from "axios";   // 导入模块
+import axios, { AxiosRequestConfig } from "axios";
+import { useMainStore } from "../stores";
+import router from "../routers";   // 导入模块
+import { useRoute } from 'vue-router'
 
 const axiosInstance = axios.create({        //创建实例
     baseURL:"",
     timeout: 10000,
 })
+
+axiosInstance.interceptors.response.use(
+    response => {
+        // 如果状态码是 200，说明接口正常，直接返回数据
+        return response
+    },
+    error => {
+        // 获取错误状态码
+        if (error.response) {
+            switch (error.response.status) {
+                case 401:
+                    // 这里是关键：401 代表未授权（Token 无效/过期）
+                    handleTokenInvalid()
+                    break
+                // 还可以处理其他状态码，比如 500 等
+                default:
+                    return Promise.reject(error)
+            }
+        }
+        return Promise.reject(error)
+    }
+)
 
 const request = <ResponseType = unknown>(  // 创建request
     url: string,                             // 上面如果给了baseURL，这里可以直接传入子路径
@@ -20,5 +45,28 @@ const request = <ResponseType = unknown>(  // 创建request
             .catch(err => reject(err))       //reject 同样由后续定义
     })
 }
+
+// 处理 Token 无效的函数
+const handleTokenInvalid = () => {
+    // 1. 清除 localStorage 中的 Token
+    localStorage.removeItem('token')
+    localStorage.removeItem('userType')
+
+    // 2. 如果使用了 Vuex/Pinia，也需要清除 store 中的用户信息
+    useMainStore().useLoginStore().setLogin(false)
+
+    const route = router.currentRoute.value
+
+    // 3. 跳转到登录页
+    // 使用 replace 而不是 push，这样用户点击浏览器后退按钮不会回到刚才的页面
+    router.replace({
+        path: '/login',
+        query: {
+            // 可选：带上当前路由路径，登录成功后跳回
+            redirect: route.fullPath
+        }
+    }).then(()=>{window.location.reload()})
+}
+
 
 export { axiosInstance, request }

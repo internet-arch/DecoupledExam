@@ -49,7 +49,7 @@
           <button
               v-if="!isSealed"
               class="btn btn-sm btn-primary"
-              @click="isOpenAddQuestion=true"
+              onclick="questionDialog2.showModal()"
           >
             添加题目
           </button>
@@ -71,15 +71,15 @@
             <!-- 题目信息 -->
             <div class="flex-1 min-w-0">
               <div class="font-medium truncate">{{ item['title'] }}</div>
-              <div class="text-sm text-gray-500" v-if="paper">
-                {{ questionTypes.find(q => q['typeId'] === item['typeId'])['typeName'] }} · {{ paper['questions'][index]['score'] }} 分
+              <div class="text-sm text-gray-500" v-if="tmpPaper">
+                {{ questionTypes.find(q => q['typeId'] === item['typeId'])['typeName'] }} · {{ tmpPaper['questions'][index]['score'] }} 分
               </div>
             </div>
 
             <!-- 分值输入 -->
             <input
                 v-if="!isSealed"
-                v-model.number="paper['questions'][index]['score']"
+                v-model.number="tmpPaper['questions'][index]['score']"
                 type="number"
                 min="0"
                 step="1"
@@ -123,10 +123,10 @@
         <button
             v-if="!isSealed"
             class="btn btn-primary"
-            :loading="saving"
             @click="savePaper"
         >
-          保存
+          <span v-if="saving" class="loading loading-spinner"></span>
+          {{ saving ? "正在保存..." : "保存" }}
         </button>
       </div>
     </div>
@@ -136,20 +136,25 @@
       <button @click="emit('update:open', false)">close</button>
     </form>
   </dialog>
-
-   添加题目对话框（占位，实际可替换为你的 QuestionSelector 组件）
-  <AddQuestionToPaperDialog
-      v-if="isOpenAddQuestion"
-      :open="isOpenAddQuestion"
-      :questionTypes="questionTypes"
-      @update:open = "(val) => { isOpenAddQuestion = val }"
-      @select="selectQuestions"
-  />
+  <dialog id="questionDialog2" class="modal">
+    <div class="modal-box max-w-[95vw] w-[95vw] ">
+      <form method="dialog">
+        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+      </form>
+      <Question
+          :is-component="true"
+          @selectQuestions ="selectQuestions"
+      />
+    </div>
+    <form method="dialog" class="modal-backdrop">
+      <button>close</button>
+    </form>
+  </dialog>
 </template>
 
 <script setup lang="ts">
-import { ref, watch, computed, onMounted } from 'vue'
-import { useRequest } from 'vue-hooks-plus'
+import {computed, ref, watch} from 'vue'
+import {useRequest} from 'vue-hooks-plus'
 import {
   addExamPaperQuestionsAPI,
   deleteExamPaperQuestionsAPI,
@@ -157,7 +162,8 @@ import {
   modifyExamPaperAPI,
   modifyExamPaperQuestionAPI
 } from '../../apis';
-import { AddQuestionToPaperDialog } from "../../components"
+import {Question} from "../../views";
+import {cloneDeep} from "lodash-es"
 
 // Props & Emits
 const props = defineProps<{
@@ -169,6 +175,8 @@ const emit = defineEmits<{
   (e: 'update:open', val: boolean): void
   (e: 'success'): void
 }>()
+
+const tmpPaper = ref();
 
 // --- 状态 ---
 const saving = ref(false)
@@ -209,19 +217,24 @@ watch(
     () => props.open,
     (isOpen) => {
       if (isOpen && props.paper) {
-        Object.assign(form.value, props.paper)
-        let n = props.paper['questions'].length
+        // 使用 cloneDeep 进行深拷贝
+        tmpPaper.value = cloneDeep(props.paper)
+
+        Object.assign(form.value, tmpPaper.value)
+        let n = tmpPaper.value['questions'].length
         for (let i = 0; i < n - 1; i++) {
           for (let j = 0; j < n - i - 1; j++) {
-            if (props.paper['questions'][j].sortOrder > props.paper['questions'][j + 1].sortOrder) {
+            if (tmpPaper.value['questions'][j].sortOrder > tmpPaper.value['questions'][j + 1].sortOrder) {
               // 交换元素
-              ;[props.paper['questions'][j], props.paper['questions'][j + 1]] = [props.paper['questions'][j + 1], props.paper['questions'][j]]
+              ;[tmpPaper.value['questions'][j], tmpPaper.value['questions'][j + 1]] = [tmpPaper.value['questions'][j + 1], tmpPaper.value['questions'][j]]
             }
           }
         }
-        for(let i = 0; i < props.paper['questions'].length; i++) {
-          getQuestionById(props.paper['questions'][i].questionId)
+        for(let i = 0; i < tmpPaper.value['questions'].length; i++) {
+          getQuestionById(tmpPaper.value['questions'][i].questionId)
         }
+      }else {
+        tmpPaper.value = {}; // 或者 null，根据你的业务逻辑
       }
     },
     { immediate: true }
@@ -229,8 +242,7 @@ watch(
 
 // --- 计算总分 ---
 const recalculateTotal = () => {
-  const total = props.paper['questions'].reduce((sum, item) => sum + (item.score || 0), 0)
-  form.value.totalScore = total
+  form.value.totalScore = tmpPaper.value['questions'].reduce((sum, item) => sum + (item.score || 0), 0)
 }
 
 // --- 题目操作 ---
@@ -253,114 +265,138 @@ const moveDown = (index: number) => {
 const deletedQuestionsId = ref([])
 
 const removeQuestion = (index: number) => {
-  if (confirm('确定删除该题目？')) {
+
+  let exists = newQuestion.value.some(item => {
+    // 注意：这里 item.id 对象的属性访问
+    return item.id.questionId === questions.value[index].id;
+  });
+
+  if(exists){ // 删除的题目是临时添加的（则只需删除newQuestion中的值即可）
+    newQuestion.value = newQuestion.value.filter(item => {
+      return item.id.questionId !== questions.value[index].id;
+    });
+  }else{  // 加入到删除数组中
     deletedQuestionsId.value.push({
       questionId: questions.value[index].id,
       paperId: form.value.paperId
     })
-    questions.value.splice(index, 1)
-    props.paper['questions'].splice(index, 1)
-    recalculateTotal()
   }
+
+  questions.value.splice(index, 1)
+  tmpPaper.value['questions'].splice(index, 1)
+  recalculateTotal()
 }
 
 const newQuestion = ref([])
 
-const selectQuestions = (selected) => {
-  for(let i = 0; i < selected.length; i++){
+const selectQuestions = (selectedId: any) => {
+
+  for(let i = 0; i < selectedId.length; i++){
     newQuestion.value.push({
       id:{
-        paperId: props.paper['paperId'],
-        questionId: selected[i].id
+        paperId: tmpPaper.value['paperId'],
+        questionId: selectedId[i]
       },
       score: 5,
-      sortOrder: props.paper['questions'].length + 1
+      sortOrder: tmpPaper.value['questions'].length + 1
     })
+
+    tmpPaper.value['questions'].push({
+      questionId: selectedId[i],
+      score: 5,
+      sortOrder: tmpPaper.value['questions'].length + 1
+    })
+
+    getQuestionById(selectedId[i])
   }
 
-  useRequest(()=>addExamPaperQuestionsAPI(newQuestion.value),{
-    onSuccess(res) {
-      if (res['code'] === 200) {
-        questions.value.push(...selected)
-        for(let i = 0; i < selected.length; i++){
-          props.paper['questions'].push({
-            questionId: selected[i].id,
-            score: 5,
-            sortOrder: props.paper['questions'].length + 1
-          })
-        }
-        recalculateTotal()
-      }else{
-        alert('保存失败：' + (res['msg'] || '未知错误'))
-      }
-    }
-  })
+  questionDialog2.close()
 }
 
 // --- 保存 ---
 const savePaper = () => {
   if (isSealed.value) return
 
-  const payload1 = {
-    paperId: form.value.paperId,
-    paperName: form.value.paperName,
-    totalScore: form.value.totalScore,
-  }
-
   saving.value = true
 
-  modifyExamPaper(payload1)
-
-  if(deletedQuestionsId.value != null && deletedQuestionsId.value.length > 0){
-    deleteExamPaperQuestions()
-  }
-
-  const payload2 = questions.value.map((item, index) => ({
-      id:{
-        paperId: props.paper['paperId'],
-        questionId: item['id']
-      },
-      score: props.paper['questions'][index]['score'],
-      sortOrder: index + 1
-    }))
-
-  modifyExamPaperQuestions(payload2)
-}
-
-const modifyExamPaper = (data) => {
-  useRequest(()=>modifyExamPaperAPI(data),{
+  // 修改试卷信息
+  useRequest(()=>modifyExamPaperAPI(form.value),{
     onSuccess(res) {
       if (res['code'] === 200) {
 
+        // 修改试卷题目（分值、顺序，新增的排除）
+        let payload = []
+        for(let i = 0; i < questions.value.length; i++){
+          let exists = newQuestion.value.some(item => {
+            // 注意：这里 item.id 对象的属性访问
+            return item.id.questionId === questions.value[i].id;
+          });
+
+          if(!exists) {   // 临时添加的题目就算修改了信息，还是走添加试卷题目的接口
+            payload.push({
+              id:{
+                paperId: tmpPaper.value['paperId'],
+                questionId: questions.value[i]['id']
+              },
+              score: tmpPaper.value['questions'][i]['score'],
+              sortOrder: i + 1
+            })
+          }
+        }
+        useRequest(()=>modifyExamPaperQuestionAPI(payload),{
+          onSuccess(res){
+            if(res['code']==200){
+
+              // 添加题目
+              useRequest(()=>addExamPaperQuestionsAPI(newQuestion.value),{
+                onSuccess(res) {
+                  if (res['code'] === 200) {
+
+                    // 删除试卷题目
+                    if(deletedQuestionsId.value != null && deletedQuestionsId.value.length > 0){
+                      useRequest(()=>deleteExamPaperQuestionsAPI(deletedQuestionsId.value),{
+                        onSuccess(res){
+                          if(res['code']==200){
+                            emit("update:open", false)
+                            emit("success")
+                            alert("保存成功")
+                          }else{
+                            alert("试卷题目删除失败：" + (res['msg'] || '未知错误'))
+                            saving.value = false
+                            return
+                          }
+                        }
+                      })
+                    }else{
+                      emit("update:open", false)
+                      emit("success")
+                      alert("保存成功")
+                    }
+
+                  }else{
+                    alert('保存失败：' + (res['msg'] || '未知错误'))
+                    saving.value = false
+                    return
+                  }
+                }
+              })
+
+            }else{
+              saving.value = false
+              alert(res['msg'])
+              return
+            }
+          }
+        })
+
       } else {
-        alert('保存失败：' + (res['msg'] || '未知错误'))
+        alert('试卷信息保存失败：' + (res['msg'] || '未知错误'))
+        saving.value = false
+        return
       }
-    }
-  })
-}
-
-const deleteExamPaperQuestions = () => {
-  useRequest(()=>deleteExamPaperQuestionsAPI(deletedQuestionsId.value),{
-    onSuccess(res){
-      if(res['code']==200){
-
-      }else{
-        alert(res['msg'])
-      }
-    }
-  })
-}
-
-const modifyExamPaperQuestions = (data) => {
-  useRequest(()=>modifyExamPaperQuestionAPI(data),{
-    onSuccess(res){
-      if(res['code']==200){
-        emit("update:open", false)
-        emit("success")
-        alert("保存成功")
-      }else{
-        alert(res['msg'])
-      }
+    },
+    onFinally(){
+      saving.value = false
     }
   })
 }

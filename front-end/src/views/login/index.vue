@@ -173,6 +173,7 @@ const handleLogin = () => {
 
   useRequest(()=>loginAPI(loginForm),{
     onSuccess(res){
+      console.log(res)
       if(res['code']==200){
         let token = res['data']
         const decoded = jwtDecode(token);

@@ -59,8 +59,28 @@
           </div>
         </div>
 
+        <!-- 进度条 -->
+        <div v-if="isGenerating" class="mt-4 p-4 bg-base-100 rounded-lg border">
+          <div class="flex items-center justify-between mb-2">
+        <span class="text-sm font-medium text-gray-700">
+          {{ progress?.message || '正在处理...' }}
+        </span>
+            <span class="text-xs text-gray-500">{{ progress?.progress || 0 }}%</span>
+          </div>
+          <progress
+              class="progress progress-success w-full h-2"
+              :value="progress?.progress || 0"
+              max="100"
+          ></progress>
+
+          <!-- 可选：显示详细信息 -->
+          <div v-if="progress?.details" class="mt-2 text-xs text-gray-500">
+            {{ progress.details }}
+          </div>
+        </div>
+
         <!-- 题型要求 -->
-        <div class="mb-6">
+        <div v-else class="mb-6">
           <div class="flex justify-between items-center mb-3">
             <h4 class="font-semibold">题型要求</h4>
             <button class="btn btn-sm btn-outline" @click="addQuestionType">
@@ -147,21 +167,22 @@
         <!-- 操作按钮 -->
         <div class="modal-action">
           <button class="btn" @click="open = false">取消</button>
-          <button class="btn btn-primary" :disabled="!canSubmit" @click="handleSubmit">
-            生成试卷
+          <button class="btn btn-primary" :disabled="isGenerating || !canSubmit" @click="handleSubmit">
+            <span v-if="isGenerating" class="loading loading-spinner"></span>
+            {{ isGenerating ? '正在生成...' : '生成试卷'}}
           </button>
         </div>
       </div>
 
-      <div class="modal-backdrop" @click="open = false"></div>
+      <div class="modal-backdrop cursor-pointer" @click="open = false"></div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
-import { generateExamPapersAPI } from '../../apis'
-import {useRequest} from "vue-hooks-plus"; // 请替换为你的实际 API
+import {ref, computed, watch, onMounted} from 'vue'
+import {generateExamPapersAPI, getPaperGenerateProgressAPI} from '../../apis'
+import { useRequest } from "vue-hooks-plus"; // 请替换为你的实际 API
 
 const props = defineProps<{
   open: boolean
@@ -218,6 +239,106 @@ watch(
     { immediate: true }
 )
 
+onMounted(()=>{
+  taskId.value = localStorage.getItem("generatePaperTaskId");
+  if(taskId.value !== null && taskId.value !== ""){
+    isGenerating.value = true
+    startPolling()
+  }
+})
+
+const isGenerating = ref<boolean>(false)
+
+const pollingInterval = ref<number>(2000); // 默认2秒
+let pollTimer = null;  // 定时器对象
+const taskId = ref<string | null>('');
+const progress = ref(null);
+
+// 开始轮询
+const startPolling = () => {
+  checkProgress();
+  pollTimer = setInterval(checkProgress, pollingInterval.value);
+}
+
+// 停止轮询
+const stopPolling = () => {
+  if (pollTimer) {
+    clearInterval(pollTimer);
+    pollTimer = null;
+  }
+}
+
+// 查看进度
+const checkProgress = () => {
+
+  if(!isGenerating.value) return
+
+  getProgress()
+}
+
+const {run: getProgress} = useRequest(()=> getPaperGenerateProgressAPI(taskId.value),{
+  onSuccess(res){
+    if(res['code']==200){
+
+      progress.value = res['data'];
+
+      if (progress.value.status === 'completed') {
+        isGenerating.value = false
+
+        stopPolling();
+        window.removeEventListener('visibilitychange', handleVisibilityChange)
+        localStorage.removeItem('generatePaperTaskId')
+
+        emit("success")
+        open.value = false
+        // 重置表单
+        form.value = {
+          paperName: '',
+          subjectId: null,
+          totalScore: 100,
+          totalQuestions: null,
+          questionTypes: []
+        }
+        tagInput.value = []
+
+        alert("组卷成功")
+
+      }else if(progress.value.status === 'failed'){
+        stopPolling()
+        isGenerating.value = false
+        localStorage.removeItem('generatePaperTaskId')
+        window.removeEventListener('visibilitychange', handleVisibilityChange)
+        alert('组卷失败')
+      }
+    }
+  },
+
+  onError(err){
+    alert('轮询失败:' + err);
+    stopPolling()
+    window.removeEventListener('visibilitychange', handleVisibilityChange)
+    isGenerating.value = false
+  },
+
+  manual: true,
+})
+
+const handleVisibilityChange = () => {
+  if (!isGenerating.value) return;
+
+  if (document.hidden) {
+    // 页面隐藏：降低频率
+    stopPolling();
+    pollingInterval.value = 10000; // 10秒
+    setTimeout(startPolling, pollingInterval.value); // 延迟启动
+  } else {
+    // 页面恢复：立即查一次 + 恢复1秒频率
+    stopPolling();
+    pollingInterval.value = 2000;
+    startPolling();
+  }
+}
+
 // 更新 tags 数组
 const updateTags = (index: number) => {
   const input = tagInput.value[index]?.trim() || ''
@@ -266,31 +387,25 @@ const handleSubmit = async () => {
   // 确保所有 tags 已同步
   form.value.questionTypes.forEach((_, i) => updateTags(i))
 
-    console.log(form.value)
-
-    useRequest(()=> generateExamPapersAPI(form.value), {
-      onSuccess(res){
-        if(res['code']==200){
-          emit("success")
-          open.value = false
-          // 重置表单
-          form.value = {
-            paperName: '',
-            subjectId: null,
-            totalScore: 100,
-            totalQuestions: null,
-            questionTypes: []
-          }
-          tagInput.value = []
-          alert("组卷成功")
-        }else{
-          alert('生成失败：' + (res['msg'] || '未知错误'))
-        }
-      },
-
-      onError(err){
-        alert('生成失败：' + (err['msg'] || '未知错误'))
+  useRequest(()=> generateExamPapersAPI(form.value), {
+    onBefore(){
+      isGenerating.value = true
+    },
+    onSuccess(res){
+      if(res['code']==200){
+        console.log('taskId：：', res['data'])
+        taskId.value = res['data']
+        localStorage.setItem('generatePaperTaskId', res['data'])
+        startPolling()
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+      }else{
+        alert('生成失败：' + (res['msg'] || '未知错误'))
       }
-    })
+    },
+
+    onError(err){
+      alert('生成失败：' + (err['msg'] || '未知错误'))
+    }
+  })
   }
   </script>
