@@ -2,7 +2,9 @@ import { createRouter, createWebHistory, RouteRecordRaw  } from "vue-router";
 import pinia from "../stores/createPinia";
 import { useMainStore } from "../stores";
 import { storeToRefs } from "pinia";
-import { Admin, Login, Register, TeacherRegister, ProfileManagement, Question, Subject, ExamPaper, StudentDashboard } from "../views";
+
+import { Admin, Login, Register, TeacherRegister, ProfileManagement, Question, Subject, ExamPaper, StudentDashboard, ExamPage, LogManagement, StudentGrade, StudentGrades } from "../views";
+
 import ExamList from "../views/exam/ExamList.vue";
 import ExamDetail from "../views/exam/ExamDetail.vue";
 import CreateExam from "../views/exam/CreateExam.vue";
@@ -49,6 +51,11 @@ const routes: Array<RouteRecordRaw> = [
     path: "/admin/subject",
     name: "subject",
     component: Subject,
+  },
+  {
+      path: "/admin/logs",
+      name: "logManagement",
+      component: LogManagement,
   },
   {
     path: "/admin",
@@ -142,6 +149,21 @@ const routes: Array<RouteRecordRaw> = [
     path: "/student/notifications",
     name: "exam-notifications",
     component: ExamNotifications
+  },
+  {
+    path: "/teacher/student-grade",
+    name: "studentGrade",
+    component: StudentGrade,
+  },
+  {
+    path: "/student/grades",
+    name: "studentGrades",
+    component: StudentGrades,
+  },
+  {
+    path: "/student/exam-page/:examId",
+    name: "exam-page",
+    component: ExamPage,
   }
 ];
 
