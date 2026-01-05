@@ -62,7 +62,7 @@
 </template>
 
 <script setup lang="ts">
-import {ref, computed, defineAsyncComponent, onMounted, ComponentPublicInstance} from 'vue'
+import { ref, computed, defineAsyncComponent, onMounted, ComponentPublicInstance } from 'vue'
 import { useRequest } from 'vue-hooks-plus'
 import { getQuestionsByIdAPI } from '../../apis'
 
@@ -168,14 +168,19 @@ const getQuestionComponent = (typeId: number) => {
     7: 'CalculationQuestionRender',
     8: 'AccountingEntryRender',
     9: 'MatchingQuestionRender',
+    10: 'SortingQuestionRender',
+    11: 'ClozeQuestionRender',
+    12: 'ReadingComprehensionRender',
+    17: 'PollQuestionRender',
   }
+
   const componentName = componentMap[typeId] || 'DefaultQuestionView'
 
   return defineAsyncComponent(() =>
-    import(`../question/render/${componentName}.vue`)
-    //     .catch(() =>
-    //   import('./question-types/DefaultQuestionView.vue')
-    // )
+          import(`../question/render/${componentName}.vue`)
+      //     .catch(() =>
+      //   import('./question-types/DefaultQuestionView.vue')
+      // )
   )
 }
 
@@ -225,18 +230,6 @@ const jumpToQuestion = (questionId: number) => {
   background-color: #f8fafc;
   padding: 1rem;
   border-left: 1px solid #e5e7eb;
-}
-
-.nav-item {
-  cursor: pointer;
-  padding: .3rem 0;
-  font-size: .85rem;
-  transition: color .2s;
-}
-
-.nav-item:hover,
-.nav-item.active {
-  color: #3b82f6;
 }
 
 .paper-preview {
