@@ -10,19 +10,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="51859a27-c936-4f71-981c-f5b724f3c64e" name="更改" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/zjut/backend/controller/StudentGradeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/zjut/backend/controller/StudentGradeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/zjut/backend/dao/StudentGradeDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/zjut/backend/dao/StudentGradeDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/zjut/backend/service/StudentGradeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/zjut/backend/service/StudentGradeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front-end/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front-end/src/apis/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/src/apis/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front-end/src/components/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/src/components/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front-end/src/components/navbar/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/src/components/navbar/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front-end/src/routers/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/src/routers/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front-end/src/views/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/src/views/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/zjut/backend/app/UserRegisterTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/zjut/backend/app/UserRegisterTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/zjut/backend/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/zjut/backend/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/zjut/backend/dao/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/zjut/backend/dao/UserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/zjut/backend/po/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/zjut/backend/po/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/zjut/backend/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/zjut/backend/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/src/apis/Server/registerAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/src/apis/Server/registerAPI.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/src/views/exam/CreateExam.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/src/views/exam/CreateExam.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/src/views/register/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/src/views/register/index.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -181,8 +177,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.25659.39" />
-        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.25659.39" />
+        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.21829.142" />
+        <option value="bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-IU-242.21829.142" />
       </set>
     </attachedChunks>
   </component>
@@ -197,6 +193,8 @@
       <workItem from="1767454385035" duration="201000" />
       <workItem from="1767500473545" duration="9012000" />
       <workItem from="1767529095809" duration="1386000" />
+      <workItem from="1767598637552" duration="958000" />
+      <workItem from="1767681329127" duration="4683000" />
     </task>
     <servers />
   </component>
