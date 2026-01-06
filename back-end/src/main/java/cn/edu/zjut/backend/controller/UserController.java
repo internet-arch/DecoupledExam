@@ -57,6 +57,14 @@ public class UserController {
             }
         }
         
+        // 检查邮箱格式
+        if (user.getEmail() != null && !user.getEmail().isEmpty()) {
+            String emailPattern = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
+            if (!user.getEmail().matches(emailPattern)) {
+                return Response.error("邮箱格式不正确");
+            }
+        }
+        
         // 检查密码是否为空
         if (user.getPassword() == null || user.getPassword().isEmpty()) {
             return Response.error("密码不能为空！");
@@ -65,11 +73,7 @@ public class UserController {
         if (userService.register(user)) {
             return Response.success("注册成功");
         } else {
-            // 区分不同错误原因
-            if (user.getPassword() == null || user.getPassword().isEmpty()) {
-                return Response.error("密码不能为空！");
-            }
-            return Response.error("注册失败，用户名可能已存在或手机号格式不正确");
+            return Response.error("注册失败，用户名或邮箱可能已存在，或手机号/邮箱格式不正确");
         }
     }
 
@@ -238,6 +242,14 @@ public class UserController {
             }
         }
         
+        // 检查邮箱格式
+        if (user.getEmail() != null && !user.getEmail().isEmpty()) {
+            String emailPattern = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
+            if (!user.getEmail().matches(emailPattern)) {
+                return Response.error("邮箱格式不正确");
+            }
+        }
+        
         // 检查密码是否为空
         if (user.getPassword() == null || user.getPassword().isEmpty()) {
             return Response.error("密码不能为空！");
@@ -246,11 +258,7 @@ public class UserController {
         if (userService.adminRegister(user)) {
             return Response.success("教师用户注册成功");
         } else {
-            // 区分不同错误原因
-            if (user.getPassword() == null || user.getPassword().isEmpty()) {
-                return Response.error("密码不能为空！");
-            }
-            return Response.error("注册失败，用户名可能已存在或手机号格式不正确");
+            return Response.error("注册失败，用户名或邮箱可能已存在，或手机号/邮箱格式不正确");
         }
     }
 
