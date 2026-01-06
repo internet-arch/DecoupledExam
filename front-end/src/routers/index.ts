@@ -11,6 +11,7 @@ import CreateExam from "../views/exam/CreateExam.vue";
 import ExamResult from "../views/exam/ExamResult.vue";
 import ExamStudents from "../views/exam/ExamStudents.vue";
 import ExamNotifications from "../views/student/ExamNotifications.vue";
+import StudentMistakes from "../views/student/mistakes/index.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -149,6 +150,11 @@ const routes: Array<RouteRecordRaw> = [
     path: "/student/notifications",
     name: "exam-notifications",
     component: ExamNotifications
+  },
+  {
+    path: "/student/mistakes",
+    name: "student-mistakes",
+    component: StudentMistakes
   },
   {
     path: "/teacher/student-grade",

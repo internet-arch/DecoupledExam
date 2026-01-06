@@ -2,24 +2,45 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="back-end:war exploded" />
+      <artifact name="back-end:war" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="51859a27-c936-4f71-981c-f5b724f3c64e" name="更改" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+    <list default="true" id="7719610f-0561-434b-acb9-ae9c64408d67" name="更改" comment="">
+      <change afterPath="$PROJECT_DIR$/../front-end/back-end/src/main/java/cn/edu/zjut/backend/app/TestMain.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../front-end/back-end/src/main/java/cn/edu/zjut/backend/app/UserRegisterTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../front-end/back-end/src/main/java/cn/edu/zjut/backend/controller/ExamPaperController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../front-end/back-end/src/main/java/cn/edu/zjut/backend/controller/TestLogController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../front-end/back-end/src/main/java/cn/edu/zjut/backend/dao/SubjectDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../front-end/back-end/src/main/java/cn/edu/zjut/backend/dto/ExamPaperDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../front-end/back-end/src/main/java/cn/edu/zjut/backend/dto/FaceImageRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../front-end/back-end/src/main/java/cn/edu/zjut/backend/dto/QuestionQueryDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../front-end/back-end/src/main/java/cn/edu/zjut/backend/po/Course.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../front-end/back-end/src/main/java/cn/edu/zjut/backend/service/ExamPaperService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../front-end/back-end/src/main/java/cn/edu/zjut/backend/service/SecurityEventLogService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../front-end/back-end/src/main/java/cn/edu/zjut/backend/util/ChatGLM_N.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../front-end/back-end/src/main/java/cn/edu/zjut/backend/util/IpUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../front-end/back-end/src/main/resources/log4j2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/ApifoxUploaderProjectSetting.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/880c897a-e2bc-4745-beed-6eda138df46a/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/880c897a-e2bc-4745-beed-6eda138df46a/storage_v2/_src_/schema/mysql.osA4Bg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/880c897a-e2bc-4745-beed-6eda138df46a/storage_v2/_src_/schema/performance_schema.kIw0nw.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/880c897a-e2bc-4745-beed-6eda138df46a/storage_v2/_src_/schema/sys.zb4BAA.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/880c897a-e2bc-4745-beed-6eda138df46a/storage_v2/_src_/schema/xuexitong.7YKWqw.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/eaed4e11-71d4-46aa-b91f-c532709200b5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/f093a165-f1a6-4354-86af-313147c39ba6.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/f093a165-f1a6-4354-86af-313147c39ba6/storage_v2/_src_/schema/DecoupledExam.olMUHQ.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/zjut/backend/controller/StudentGradeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/zjut/backend/controller/StudentGradeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/zjut/backend/dao/StudentGradeDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/zjut/backend/dao/StudentGradeDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/zjut/backend/service/StudentGradeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/zjut/backend/service/StudentGradeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front-end/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front-end/src/apis/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/src/apis/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front-end/src/components/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/src/components/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/.vscode/extensions.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../front-end/src/components/navbar/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/src/components/navbar/index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../front-end/src/routers/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/src/routers/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../front-end/src/views/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/src/views/index.ts" afterDir="false" />
@@ -29,16 +50,21 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;muertian&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/muertian/DecoupledExam.git&quot;,
+    &quot;accountId&quot;: &quot;d547504d-62ca-41bf-be3f-8e12f6382be0&quot;
+  }
+}</component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
     <option name="FILTER_WARNINGS" value="false" />
@@ -55,12 +81,9 @@
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
-  &quot;associatedIndex&quot;: 0
+  &quot;associatedIndex&quot;: 1
 }</component>
-  <component name="ProjectId" id="37kkJBi5cWNpNVGA8FItWa1nVq5" />
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="1" id="Add" />
-  </component>
+  <component name="ProjectId" id="37sK1QSqnA9L1ZKFe4TpF8VaoQ1" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -71,13 +94,14 @@
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;Tomcat 服务器.Tomcat 11.0.3.executor&quot;: &quot;Run&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;项目&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;工件&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
@@ -92,15 +116,15 @@
     <configuration name="Tomcat 11.0.3" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 11.0.3" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
-        <artifact name="back-end:war exploded">
+        <artifact name="back-end:war">
           <settings>
             <option name="CONTEXT_PATH" value="/" />
           </settings>
         </artifact>
       </deployment>
       <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="0e804641-8d1f-454f-a452-e06761eb56e9" />
-        <option name="HTTP_PORT" value="80" />
+        <option name="BASE_DIRECTORY_NAME" value="6ee70e4e-edd2-48ec-b57a-79dcca0b83d2" />
+        <option name="JNDI_PORT" value="11" />
       </server-settings>
       <predefined_log_file enabled="true" id="Tomcat" />
       <predefined_log_file enabled="true" id="Tomcat Catalina" />
@@ -108,7 +132,7 @@
       <predefined_log_file id="Tomcat Host Manager" />
       <predefined_log_file id="Tomcat Localhost Access" />
       <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="50860" />
+        <option name="DEBUG_PORT" value="8827" />
       </RunnerSettings>
       <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
         <option name="USE_ENV_VARIABLES" value="true" />
@@ -173,7 +197,7 @@
       <method v="2">
         <option name="Make" enabled="true" />
         <option name="BuildArtifacts" enabled="true">
-          <artifact name="back-end:war exploded" />
+          <artifact name="back-end:war" />
         </option>
       </method>
     </configuration>
@@ -189,14 +213,13 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="默认任务">
-      <changelist id="51859a27-c936-4f71-981c-f5b724f3c64e" name="更改" comment="" />
-      <created>1767454383535</created>
+      <changelist id="7719610f-0561-434b-acb9-ae9c64408d67" name="更改" comment="" />
+      <created>1767686124500</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1767454383535</updated>
-      <workItem from="1767454385035" duration="201000" />
-      <workItem from="1767500473545" duration="9012000" />
-      <workItem from="1767529095809" duration="1386000" />
+      <updated>1767686124500</updated>
+      <workItem from="1767686125688" duration="703000" />
+      <workItem from="1767686859296" duration="27000" />
     </task>
     <servers />
   </component>
