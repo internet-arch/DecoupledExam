@@ -55,6 +55,7 @@ public class ExamWrongBookDAO {
         String hql = "from ExamWrongBook where id = :id";
         try {
             Query<ExamWrongBook> queryObject = session.createQuery(hql, ExamWrongBook.class);
+            queryObject.setParameter("id", id);
             return queryObject.list().get(0);
         } catch (RuntimeException re) {
             System.out.println("find by hql failed"+re);
@@ -67,6 +68,7 @@ public class ExamWrongBookDAO {
         String hql = "from ExamWrongBook where studentId = :studentId";
         try {
             Query<ExamWrongBook> queryObject = session.createQuery(hql, ExamWrongBook.class);
+            queryObject.setParameter("studentId", studentId);
             return queryObject.list();
         } catch (RuntimeException re) {
             System.out.println("find by hql failed"+re);

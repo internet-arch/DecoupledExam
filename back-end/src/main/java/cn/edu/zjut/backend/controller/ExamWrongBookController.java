@@ -1,5 +1,6 @@
 package cn.edu.zjut.backend.controller;
 
+import cn.edu.zjut.backend.dto.ExamWrongBookDTO;
 import cn.edu.zjut.backend.po.ExamWrongBook;
 import cn.edu.zjut.backend.service.ExamWrongBookService;
 import cn.edu.zjut.backend.util.Response;
@@ -22,10 +23,10 @@ public class ExamWrongBookController {
 
     @RequestMapping(value = "/api/examWrongBook", method = RequestMethod.GET)
     @ResponseBody
-    public Response<List<ExamWrongBook>> examWrongBook() {
+    public Response<List<ExamWrongBookDTO>> examWrongBook() {
         try{
-            List<ExamWrongBook> examWrongBookList = examWrongBookServ.queryExamWrongBookByStudentId(UserContext.getUserId());
-            return Response.success(examWrongBookList);
+            List<ExamWrongBookDTO> examWrongBookDTOs = examWrongBookServ.queryExamWrongBook(UserContext.getUserId());
+            return Response.success(examWrongBookDTOs);
         }catch (Exception e){
             e.printStackTrace();
             return Response.error(e.getMessage());

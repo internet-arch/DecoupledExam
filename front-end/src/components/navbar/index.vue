@@ -19,6 +19,7 @@
     <ul v-else-if="userType=='2'" class="menu menu-horizontal px-1 text-base">
       <li><a href="/exam">我的考试</a></li>
       <li><a href="/student/grades">我的成绩</a></li>
+      <li><a href="/student/mistakes">我的错题</a></li>
       <li><a href="/student/notifications">考试通知</a></li>
       <li><a href="/student/courses">我的课程</a></li>
     </ul>

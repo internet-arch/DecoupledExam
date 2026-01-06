@@ -22,7 +22,15 @@
     <schema id="15" parent="1" name="7"/>
     <schema id="16" parent="1" name="8"/>
     <schema id="17" parent="1" name="9"/>
-    <hash-table id="18" parent="2" name="user:2"/>
-    <string id="19" parent="2" name="namePool"/>
+    <hash-table id="18" parent="2" name="task:3460b977-6bf1-4046-92ed-bca259ec8fef"/>
+    <hash-table id="19" parent="2" name="task:4c825299-a647-49f9-aece-65046acf1083"/>
+    <hash-table id="20" parent="2" name="task:8d608db6-a57d-47bd-bb02-d196b83c662c"/>
+    <hash-table id="21" parent="2" name="task:da7d3f20-3f20-4470-ad96-da6e9e710a1f"/>
+    <hash-table id="22" parent="2" name="task:ebfa0c5b-73fe-4265-9eb2-808293400b16"/>
+    <hash-table id="23" parent="2" name="task:f2ea0e93-c65e-4b69-a521-f38582ccdb8b"/>
+    <hash-table id="24" parent="2" name="user:2"/>
+    <string id="25" parent="2" name="exam:violation:2:3"/>
+    <string id="26" parent="2" name="exam:violation:null:null"/>
+    <string id="27" parent="2" name="namePool"/>
   </database-model>
 </dataSource>

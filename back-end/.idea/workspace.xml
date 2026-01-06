@@ -9,34 +9,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="69795ad7-e08c-4d45-a25e-f51015a25c09" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/web/WEB-INF/web.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../front-end/src/apis/Server/teacherSubjectAPI.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../front-end/src/views/admin/simulateLogin.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../front-end/src/views/admin/studentsList.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../front-end/src/views/admin/teachersList.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../front-end/src/views/admin/userManagement.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../front-end/src/views/admin/userManagement/index.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../front-end/src/views/admin/usersList.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../front-end/src/views/teacher/dashboard/TeacherSubjectBinding.vue" afterDir="false" />
+    <list default="true" id="1e295152-80a3-45af-8987-9cf10e9d035f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../front-end/src/views/student/mistakes/index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4fb50617-0674-4e92-99ed-afd4d7d64828.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/6cfcfa7a-baa1-49e3-a08a-7467cfa9325e.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/6cfcfa7a-baa1-49e3-a08a-7467cfa9325e/storage_v2/_src_/schema/DecoupledExam.olMUHQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/78e981c6-b670-47fe-bf70-3729fc7ff827.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c0c5eefd-91e6-4af0-81de-dbeb813a8c87.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c0c5eefd-91e6-4af0-81de-dbeb813a8c87.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c0c5eefd-91e6-4af0-81de-dbeb813a8c87/storage_v2/_src_/schema/DecoupledExam.olMUHQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c0c5eefd-91e6-4af0-81de-dbeb813a8c87/storage_v2/_src_/schema/DecoupledExam.olMUHQ.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/zjut/backend/aspect/ExamAuthHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/zjut/backend/aspect/ExamAuthHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/zjut/backend/service/ExamAnswerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/zjut/backend/service/ExamAnswerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/zjut/backend/service/QuestionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/zjut/backend/service/QuestionService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/zjut/backend/util/FaceRec.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/zjut/backend/util/FaceRec.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front-end/src/apis/Server/userAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/src/apis/Server/userAPI.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/zjut/backend/controller/ExamWrongBookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/zjut/backend/controller/ExamWrongBookController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/zjut/backend/dao/ExamWrongBookDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/zjut/backend/dao/ExamWrongBookDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/edu/zjut/backend/service/ExamWrongBookService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/edu/zjut/backend/service/ExamWrongBookService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/web.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/.vscode/extensions.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../front-end/src/components/navbar/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/src/components/navbar/index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../front-end/src/routers/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/src/routers/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front-end/src/views/admin/dashboard/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/src/views/admin/dashboard/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front-end/src/views/admin/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/src/views/admin/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../front-end/src/views/teacher/dashboard/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/src/views/teacher/dashboard/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/src/views/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/src/views/index.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +65,7 @@
   "customColor": "",
   "associatedIndex": 4
 }]]></component>
-  <component name="ProjectId" id="37sHx9Ogsi8PvJs1UZgbCwqTQwA" />
+  <component name="ProjectId" id="37sp1rT0Rh0LzxZYb9Ti87HG4XD" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
   </component>
@@ -86,7 +76,6 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Tomcat Server.Tomcat 11.0.3.executor": "Run",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
@@ -94,6 +83,9 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.32528734",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -114,7 +106,7 @@
         </artifact>
       </deployment>
       <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="e0d25669-e1aa-4e43-afaf-65a0e3d78d3a" />
+        <option name="BASE_DIRECTORY_NAME" value="4703fcdc-cf05-4a59-85da-5ee672953b4d" />
       </server-settings>
       <predefined_log_file enabled="true" id="Tomcat" />
       <predefined_log_file enabled="true" id="Tomcat Catalina" />
@@ -122,7 +114,7 @@
       <predefined_log_file id="Tomcat Host Manager" />
       <predefined_log_file id="Tomcat Localhost Access" />
       <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="54092" />
+        <option name="DEBUG_PORT" value="60907" />
       </RunnerSettings>
       <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
         <option name="USE_ENV_VARIABLES" value="true" />
@@ -203,12 +195,12 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="69795ad7-e08c-4d45-a25e-f51015a25c09" name="Changes" comment="" />
-      <created>1767685104158</created>
+      <changelist id="1e295152-80a3-45af-8987-9cf10e9d035f" name="Changes" comment="" />
+      <created>1767701421763</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1767685104158</updated>
-      <workItem from="1767685106737" duration="12362000" />
+      <updated>1767701421763</updated>
+      <workItem from="1767701424653" duration="2387000" />
     </task>
     <servers />
   </component>
