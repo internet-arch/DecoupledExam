@@ -9,6 +9,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
+    <list default="true" id="51859a27-c936-4f71-981c-f5b724f3c64e" name="更改" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/src/apis/Server/teacherRegisterAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/src/apis/Server/teacherRegisterAPI.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../front-end/src/views/admin/teacherRegister/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/src/views/admin/teacherRegister/index.vue" afterDir="false" />
+=======
     <list default="true" id="52d7f3ef-4c7d-4dae-9bb8-15d30d440cd3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
@@ -38,6 +45,7 @@
       <change beforePath="$PROJECT_DIR$/../front-end/src/views/login/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/src/views/login/index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../front-end/src/views/profile/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/src/views/profile/index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../front-end/src/views/register/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../front-end/src/views/register/index.vue" afterDir="false" />
+>>>>>>> upstream/main
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,16 +93,38 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+<<<<<<< HEAD
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "Tomcat 服务器.Tomcat 11.0.3.executor": "Run",
+    "Tomcat 服务器.Tomcat 11.0.4.executor": "Run",
+    "git-widget-placeholder": "main",
+=======
     "Application.EmailTest.executor": "Run",
     "Application.TestMain.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "Tomcat Server.Tomcat 11.0.3.executor": "Run",
+>>>>>>> upstream/main
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+<<<<<<< HEAD
+    "project.structure.last.edited": "项目",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
+  }
+}]]></component>
+  <component name="RunManager">
+=======
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.0",
@@ -136,6 +166,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+>>>>>>> upstream/main
     <configuration name="Tomcat 11.0.3" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 11.0.3" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
@@ -238,8 +269,15 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
+<<<<<<< HEAD
+        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.21829.142" />
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.62" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.62" />
+        <option value="bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-IU-242.21829.142" />
+=======
         <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.15989.150" />
         <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-IU-241.15989.150" />
+>>>>>>> upstream/main
       </set>
     </attachedChunks>
   </component>
@@ -250,9 +288,20 @@
       <created>1767705471043</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
+<<<<<<< HEAD
+      <updated>1767454383535</updated>
+      <workItem from="1767454385035" duration="201000" />
+      <workItem from="1767500473545" duration="9012000" />
+      <workItem from="1767529095809" duration="1386000" />
+      <workItem from="1767598637552" duration="958000" />
+      <workItem from="1767681329127" duration="4683000" />
+      <workItem from="1767621305229" duration="1978000" />
+      <workItem from="1767677853784" duration="2833000" />
+=======
       <updated>1767705471043</updated>
       <workItem from="1767705472871" duration="7757000" />
       <workItem from="1767725557373" duration="167000" />
+>>>>>>> upstream/main
     </task>
     <servers />
   </component>
